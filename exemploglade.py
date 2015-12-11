@@ -98,8 +98,8 @@ def camaras(Button):
 def tripping(Button):
     lblTitulo.set_text(" %s" % "TRIPPDAWORLDDDDD")
 
-def compras(Button):
 
+def compras(Button):
     cliente = entry1.get_text()
     apellido = entry2.get_text()
     fecha = entry3.get_text()
@@ -114,7 +114,7 @@ def compras(Button):
     '""" + alarm + """',
     '""" + cam + """'
     )"""
-
+  
     cursor.execute(datosDomoticos)
     bbdd.commit()
     cursor.execute("""select * from domotica""")
