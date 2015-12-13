@@ -38,11 +38,6 @@ cursor.execute(sqlDomotica)
 
 # cursor.execute(datos)
 
-
-
-
-
-
 cliente = "ninguno"
 apellido = "ninguno"
 fecha = "ninguno"
@@ -114,12 +109,48 @@ def compras(Button):
     '""" + alarm + """',
     '""" + cam + """'
     )"""
-  
+
     cursor.execute(datosDomoticos)
     bbdd.commit()
+
+
+def consultar(Button):
     cursor.execute("""select * from domotica""")
     for result in cursor:
-        print("Cliente:" + str(result[0]) + " fecha:" + result[1] + " producto1:" + result[2])
+        print("Cliente:" + str(result[0])
+              + " Apellido:" + result[1]
+              + " Fecha:" + result[2]
+              + " Raspberry:" + result[3]
+              + " Leds:" + result[4]
+              + " Persianas:" + result[5]
+              + " Alarma:" + result[6]
+              + " Camaras:" + result[7])
+
+
+def borrar(Button):
+    Nombre = entry1.get_text()
+    cursor.execute("delete from domotica where cliente ='" + cliente + "'")
+    print("Borrado")
+    bbdd.commit()
+
+
+def modificar(Button):
+    cliente = entry1.get_text()
+    apellido = entry2.get_text()
+    fecha = entry3.get_text()
+    print(cliente + " " + apellido + " " + fecha + " " + rasp + " " + led + " " + cort + " " + alarm + " " + cam)
+    modificarDomoticos = """update domotica set=
+    '""" + cliente + """',
+    '""" + apellido + """',
+    '""" + fecha + """',
+    '""" + rasp + """',
+    '""" + led + """',
+    '""" + cort + """',
+    '""" + alarm + """',
+    '""" + cam + """'
+    """
+    cursor.execute(modificarDomoticos)
+    bbdd.commit()
 
 
 handlers = {
@@ -135,7 +166,11 @@ handlers = {
     "alarma": alarma,
     "camaras": camaras,
     "trippdaworld": tripping,
-    "comprar": compras
+    "comprar": compras,
+
+    "consulta": consultar,
+    "modifica":modificar,
+    "borra":borrar
 }
 
 builder = Gtk.Builder()
@@ -161,6 +196,6 @@ entry3 = builder2.get_object("entry3")
 
 Gtk.main()
 
-bbdd.commit()
+
 # cerramos la conexion
 bbdd.close()
