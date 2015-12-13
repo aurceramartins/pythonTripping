@@ -111,6 +111,7 @@ def compras(Button):
     )"""
 
     cursor.execute(datosDomoticos)
+    print("El cliente " + cliente + " ha realizado su compra GRACiASSSSS")
     bbdd.commit()
 
 
@@ -130,7 +131,7 @@ def consultar(Button):
 def borrar(Button):
     nombre = entry1.get_text()
     cursor.execute("delete from domotica where cliente ='" + nombre + "'")
-    print("Borrado")
+    print("Borrado el cliente" + nombre)
     bbdd.commit()
 
 
@@ -138,7 +139,7 @@ def modificar(Button):
     cliente = entry1.get_text()
     apellido = entry2.get_text()
     fecha = entry3.get_text()
-    print(cliente + " " + apellido + " " + fecha + " " + rasp + " " + led + " " + cort + " " + alarm + " " + cam)
+
     modificarDomoticos = """update domotica set
     cliente='""" + cliente + """',
     apellido='""" + apellido + """',
@@ -147,11 +148,12 @@ def modificar(Button):
     cortinas='""" + cort + """',
     alarma='""" + alarm + """',
     camaras='""" + cam + """'
-    where cliente ='"""+cliente+"""'
+    where cliente ='""" + cliente + """'
     """
 
     cursor.execute(modificarDomoticos)
-    print(cliente + " " + apellido + " " + fecha + " " + rasp + " " + led + " " + cort + " " + alarm + " " + cam)
+    print(
+        "Lo has modificado y queda asi: " + cliente + " " + apellido + " " + fecha + " " + rasp + " " + led + " " + cort + " " + alarm + " " + cam)
     bbdd.commit()
 
 
@@ -171,8 +173,8 @@ handlers = {
     "comprar": compras,
 
     "consulta": consultar,
-    "modifica":modificar,
-    "borra":borrar
+    "modifica": modificar,
+    "borra": borrar
 }
 
 builder = Gtk.Builder()
@@ -197,7 +199,6 @@ entry2 = builder2.get_object("entry2")
 entry3 = builder2.get_object("entry3")
 
 Gtk.main()
-
 
 # cerramos la conexion
 bbdd.close()
