@@ -128,8 +128,8 @@ def consultar(Button):
 
 
 def borrar(Button):
-    Nombre = entry1.get_text()
-    cursor.execute("delete from domotica where cliente ='" + cliente + "'")
+    nombre = entry1.get_text()
+    cursor.execute("delete from domotica where cliente ='" + nombre + "'")
     print("Borrado")
     bbdd.commit()
 
