@@ -139,17 +139,19 @@ def modificar(Button):
     apellido = entry2.get_text()
     fecha = entry3.get_text()
     print(cliente + " " + apellido + " " + fecha + " " + rasp + " " + led + " " + cort + " " + alarm + " " + cam)
-    modificarDomoticos = """update domotica set=
-    '""" + cliente + """',
-    '""" + apellido + """',
-    '""" + fecha + """',
-    '""" + rasp + """',
-    '""" + led + """',
-    '""" + cort + """',
-    '""" + alarm + """',
-    '""" + cam + """'
+    modificarDomoticos = """update domotica set
+    cliente='""" + cliente + """',
+    apellido='""" + apellido + """',
+    raspberry='""" + rasp + """',
+    leds='""" + led + """',
+    cortinas='""" + cort + """',
+    alarma='""" + alarm + """',
+    camaras='""" + cam + """'
+    where cliente ='"""+cliente+"""'
     """
+
     cursor.execute(modificarDomoticos)
+    print(cliente + " " + apellido + " " + fecha + " " + rasp + " " + led + " " + cort + " " + alarm + " " + cam)
     bbdd.commit()
 
 
